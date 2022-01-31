@@ -1,0 +1,14 @@
+{% extends "base-generation.html" %}
+{% load static %}
+
+{% block content %}
+
+<ul class="list">
+    {% for thing in things %}
+    <li class="list__item">
+        {{thing.name}} | {{thing.master}} | {{thing.wrnt}}
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

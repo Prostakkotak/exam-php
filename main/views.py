@@ -13,7 +13,12 @@ from .models import *
 
 class Index(View):
     def get(self, request):
-        return render(request, "base-generation.html")
+
+        things = Thing.objects.all()
+
+        return render(request, "index.html", context={
+            'things': things
+        })
 
 class Registration(View):
     def get(self, request):
