@@ -1,0 +1,31 @@
+{% extends "../base-generation.html" %}
+{% load static %}
+
+{% block title %}<title>Регистрация</title>{% endblock %}
+
+{% block sidebar %}{% endblock %}
+
+{% block content %}
+<div class="login__wrapper">
+    <div class="login">
+        <h1 class="login__title">Регистрация</h1>
+        {% if form.errors %}
+        <div class="login__error">
+            {{form.errors}}
+        </div>
+        {% endif %}
+        <form method="POST" class="login-form">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="login-form__input-block">
+                <div class="login-form__label">{{field.label_tag}}</div>
+                {{field}}
+            </div>
+            {% endfor %}
+            <input value="Создать аккаунт" type="submit" class="login-form__submit">
+        </form>
+
+        <a href="/admin" class="login__register-link">Авторизация</a>
+    </div>
+</div>
+{% endblock %}
