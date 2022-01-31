@@ -4,11 +4,40 @@
 {% block content %}
 
 <ul class="list">
+    <a href="/admin" class="admin">Админка</a>
+    <a href="{% url 'registration' %}" class="register-link">Регистрация</a>
     {% for thing in things %}
     <li class="list__item">
-        {{thing.name}} | {{thing.master}} | {{thing.wrnt}}
+        <div class="name">
+            Название: {{thing.name}}
+        </div>
+        <div class="master">
+            Создатель: {{thing.master}}
+        </div>
+        <div class="wrnt">
+            Гарантия до: {{thing.wrnt}}
+        </div>
     </li>
     {% endfor %}
+
+    {% if user.is_authenticated %}
+    Ваши вещи
+
+    {% for thing in user_things %}
+    <li class="list__item">
+        <div class="name">
+            Название: {{thing.name}}
+        </div>
+        <div class="master">
+            Создатель: {{thing.master}}
+        </div>
+        <div class="wrnt">
+            Гарантия до: {{thing.wrnt}}
+        </div>
+    </li>
+    {% endfor %}
+
+    {% endif %}
 </ul>
 
 {% endblock %}

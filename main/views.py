@@ -16,8 +16,16 @@ class Index(View):
 
         things = Thing.objects.all()
 
+        if request.user.is_authenticated: # Если юзер залогинен, тащим его вещи в шаблон
+            usages = Usage.objects.filter(user_id=request.user.id)
+            user_things = []
+
+            for item in usages:
+                user_things.append(Thing.objects.get(pk=item.thing_id.pk))
+
         return render(request, "index.html", context={
-            'things': things
+            'things': things,
+            "user_things": user_things
         })
 
 class Registration(View):
